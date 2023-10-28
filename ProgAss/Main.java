@@ -12,7 +12,7 @@ public class Main {
         int result = pidManager.allocateMap();
 
         if (result == -1) {
-            System.out.println("Error: Unable to initialize PID Manager.");
+            System.out.println("Error pid manager");
             return;
         }
 
@@ -28,6 +28,7 @@ public class Main {
                 String name =tokens[0];
                 int priority = Integer.parseInt(tokens[1]);
                 int cpuBurst = Integer.parseInt(tokens[2]);
+                int originalBurst = Integer.parseInt(tokens[2]);
                 int arrivalTime = Integer.parseInt(tokens[3]);
                 int numChildren = Integer.parseInt(tokens[4]);
 
@@ -38,7 +39,7 @@ public class Main {
                     return;
                 }
 
-                Process process = new Process(name,pid,priority, cpuBurst, arrivalTime, numChildren);
+                Process process = new Process(name,pid,priority, cpuBurst,originalBurst, arrivalTime, numChildren);
                 processes.add(process);
                 pidCounter++;
 
@@ -50,7 +51,7 @@ public class Main {
                         return;
                     }
 
-                    Process childProcess = new Process(name,childPid, priority, cpuBurst, arrivalTime, 0);
+                    //Process childProcess = new Process(name,childPid, priority, cpuBurst, arrivalTime, 0);
                     //processes.add(childProcess);
                     pidCounter++;
                 }
@@ -60,7 +61,7 @@ public class Main {
             return;
         }
 
-        String Decision = "RR";
+        String Decision = "PRIRR";
         int timeQuantum = 4;
 
         if ( Decision == "FCFS" )

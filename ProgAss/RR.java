@@ -26,25 +26,35 @@ class RR extends Scheduler {
         while (!processQueue.isEmpty()) {
             Process process = processQueue.poll();
 
-            System.out.println("Time " + currentTime + ": Process " + process.name +
-                    " (PID: " + process.pid + ") created. Arrival Time: " + process.arrivalTime +
-                    ", CPU Burst: " + process.cpuBurst);
+            if (process.cpuBurst == process.originalBurst) {
+                System.out.println("Time " + currentTime + ": Process " + process.name +
+                        " (PID: " + process.pid + ") created. Arrival Time: " + process.arrivalTime +
+                        ", CPU Burst: " + process.cpuBurst);
+            } else {
+                System.out.println("Time " + currentTime + ": Process " + process.name +
+                        " (PID: " + process.pid + ") resumed. Remaining CPU Burst: " + process.cpuBurst);
+            }
 
             int executionTime = Math.min(process.cpuBurst, timeQuantum);
             int completionTime = currentTime + executionTime;
             totalTurnAroundTime += (completionTime - process.arrivalTime);
             totalWaitingTime += (completionTime - process.arrivalTime - executionTime);
 
-            if (executionTime < process.cpuBurst) {
-                // The process has remaining CPU burst, add it back to the queue
-                process.cpuBurst -= executionTime;
-                processQueue.add(process);
-            } else {
+
+            if (executionTime >= process.cpuBurst) {
                 System.out.println("Time " + completionTime + ": Process " + process.name +
                         " (PID: " + process.pid + ") deleted");
             }
 
             currentTime = completionTime;
+
+            if (executionTime < process.cpuBurst) {
+                // The process has remaining CPU burst, add it back to the queue
+                process.cpuBurst -= executionTime;
+                System.out.println("Time " + currentTime + ": Process " + process.name +
+                    " (PID: " + process.pid + ") is waiting.");
+                processQueue.add(process);
+            } 
         }
 
         // Calculate and print average turnaround time and waiting time
