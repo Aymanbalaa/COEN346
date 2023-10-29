@@ -21,13 +21,16 @@ class FCFS extends Scheduler {
                     " (PID: " + process.pid + ") created. Arrival Time: " + process.arrivalTime +
                     ", CPU Burst: " + process.cpuBurst);
 
+            int waitingTime = Math.max(0, currentTime - process.arrivalTime);
+            totalWaitingTime += waitingTime;
+
+            // Calculate completion time and turnaround time
             int completionTime = currentTime + process.cpuBurst;
             totalTurnAroundTime += (completionTime - process.arrivalTime);
-            totalWaitingTime += (completionTime - process.arrivalTime - process.cpuBurst);
 
             System.out.println("Time " + completionTime + ": Process " + process.name +
-                    " (PID: " + process.pid + " deleted");
-            
+                    " (PID: " + process.pid + ") deleted");
+
             currentTime = completionTime;
         }
 

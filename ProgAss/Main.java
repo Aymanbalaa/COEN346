@@ -4,7 +4,17 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+
+
+// T1, 1, 20, 0, 3
+// T1.1, 2, 5, 4, 0
+// T1.2, 3, 10, 5, 0
+// T1.3, 3, 15, 6, 0
+// T2, 5, 10, 0, 0
 
 public class Main {
     public static void main(String[] args) {
@@ -19,7 +29,7 @@ public class Main {
         List<Process> processes = new ArrayList<>();
 
         // Read processes from the file and assign PIDs using pidManager.allocatePid()
-        String filePath = "ProgAss/Schedule.txt"; // Replace with the actual file path
+        String filePath = "ProgAss/schedule.txt"; // Replace with the actual file path
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             int pidCounter = 0;
@@ -61,7 +71,9 @@ public class Main {
             return;
         }
 
-        String Decision = "PRIRR";
+        Collections.sort(processes, Comparator.comparing(Process::getArrivalTime));
+
+        String Decision = "RR";
         int timeQuantum = 4;
 
         if ( Decision == "FCFS" )
