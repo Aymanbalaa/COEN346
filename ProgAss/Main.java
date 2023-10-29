@@ -9,13 +9,6 @@ import java.util.Comparator;
 import java.util.List;
 
 
-
-// T1, 1, 20, 0, 3
-// T1.1, 2, 5, 4, 0
-// T1.2, 3, 10, 5, 0
-// T1.3, 3, 15, 6, 0
-// T2, 5, 10, 0, 0
-
 public class Main {
     public static void main(String[] args) {
         PidManager pidManager = new PidManager();
@@ -73,7 +66,7 @@ public class Main {
 
         Collections.sort(processes, Comparator.comparing(Process::getArrivalTime));
 
-        String Decision = "RR";
+        String Decision = "PRIRR";
         int timeQuantum = 4;
 
         if ( Decision == "FCFS" )
