@@ -18,7 +18,7 @@ class PRIRR extends Scheduler {
         float totalBurstTime = 0;
         int completedProcesses = 0;
 
-        // Use a PriorityQueue to sort processes by priority in descending order
+        // Priorityqueue because we need to use their priorities for scheduling 
         PriorityQueue<Process> processQueue = new PriorityQueue<>(Comparator.comparing(Process::getPriority));
 
         while (!processes.isEmpty() || !processQueue.isEmpty()) {
@@ -56,8 +56,8 @@ class PRIRR extends Scheduler {
                 }
 
                 currentTime = completionTime;
-
-                // Add all processes that have arrived to the queue
+                
+                // add new arrived processes to queue
                 for (int i = 0; i < processes.size(); i++) {
                     Process newProcess = processes.get(i);
                     if (newProcess.arrivalTime <= currentTime) {
@@ -68,11 +68,11 @@ class PRIRR extends Scheduler {
                 }
 
                 if (executionTime < process.cpuBurst) {
-                    // The process has remaining CPU burst, add it back to the queue
+                    // NOT DONE ?
                     process.cpuBurst -= executionTime;
                     System.out.println("Time " + currentTime + ": Process " + process.name +
                             " (PID: " + process.pid + ") is waiting.");
-                    // Add the unfinished process to the end of the queue
+                    // Add the unfinished process to the BACKKK of the queue
                     processQueue.add(process);
                 }
             } else {
@@ -80,7 +80,6 @@ class PRIRR extends Scheduler {
             }
         }
 
-        // Calculate and print average turnaround time and waiting time
         if (completedProcesses > 0) {
             float averageTurnAroundTime = totalTurnAroundTime / completedProcesses;
             float averageBurstTime = totalBurstTime / completedProcesses;

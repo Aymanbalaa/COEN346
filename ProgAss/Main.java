@@ -11,6 +11,13 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+//            VARIABLES TO BE CHANGED                //
+//==================================================//
+    String Decision = "PRIRR";
+    int timeQuantum = 4;
+//==================================================//
+
+
         PidManager pidManager = new PidManager();
         int result = pidManager.allocateMap();
 
@@ -22,7 +29,7 @@ public class Main {
         List<Process> processes = new ArrayList<>();
 
         // Read processes from the file and assign PIDs using pidManager.allocatePid()
-        String filePath = "ProgAss/schedule.txt"; // Replace with the actual file path
+        String filePath = "ProgAss/schedule.txt"; 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             int pidCounter = 0;
@@ -66,8 +73,6 @@ public class Main {
 
         Collections.sort(processes, Comparator.comparing(Process::getArrivalTime));
 
-        String Decision = "PRIRR";
-        int timeQuantum = 4;
 
         if ( Decision == "FCFS" )
         {
@@ -84,8 +89,6 @@ public class Main {
             PRIRR prirr = new PRIRR(processes, timeQuantum);
             prirr.schedule();
         }
-
-        
 
         // Release PIDs after all processes are completed
         for (int i = 0; i < processes.size(); i++) {

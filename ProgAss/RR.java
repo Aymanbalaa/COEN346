@@ -57,8 +57,7 @@ class RR extends Scheduler {
                 }
 
                 currentTime = completionTime;
-
-                // Add all processes that have arrived to the queue
+                
                 for (int i = 0; i < processes.size(); i++) {
                     Process newProcess = processes.get(i);
                     if (newProcess.arrivalTime <= currentTime) {
@@ -69,11 +68,11 @@ class RR extends Scheduler {
                 }
 
                 if (executionTime < process.cpuBurst) {
-                    // The process has remaining CPU burst, add it back to the queue
+
                     process.cpuBurst -= executionTime;
                     System.out.println("Time " + currentTime + ": Process " + process.name +
                             " (PID: " + process.pid + ") is waiting.");
-                    // Add the unfinished process to the end of the queue
+
                     processQueue.add(process);
                 }
             } else {
@@ -81,7 +80,6 @@ class RR extends Scheduler {
             }
         }
 
-        // Calculate and print average turnaround time and waiting time
         if (completedProcesses > 0) {
             float averageTurnAroundTime = totalTurnAroundTime / completedProcesses;
             float averageBurstTime = totalBurstTime / completedProcesses;

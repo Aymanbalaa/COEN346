@@ -9,7 +9,8 @@ class FCFS extends Scheduler {
 
     @Override
     void schedule() {
-        // Output processes
+
+        
         System.out.println("FCFS Scheduling Details:");
         System.out.println();
         int currentTime = 0;

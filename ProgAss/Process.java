@@ -18,12 +18,6 @@ public class Process {
         this.arrivalTime = arrivalTime;
         this.numChildren = numChildren;
     }
-    @Override
-public String toString() {
-    return 
-            name ;
-}
-
 
     public String getName()
     {
@@ -49,5 +43,8 @@ public String toString() {
         return numChildren;
     }
 
-    // You can add more methods and attributes as needed
+    @Override
+    public String toString() {
+    return  name ;
+    }
 }

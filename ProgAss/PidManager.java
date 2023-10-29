@@ -9,14 +9,14 @@ class PidManager {
     public PidManager() {
         int numberOfPids = MAX_PID - MIN_PID + 1;
         pidMap = new BitSet(numberOfPids);
-        pidMap.clear(); // Initialize all PIDs as available (set to 0)
+        pidMap.clear(); 
     }
 
     public int allocateMap() {
         if (pidMap == null) {
-            return -1; // Unable to create and initialize pidMap
+            return -1; 
         }
-        return 1; // Successful initialization
+        return 1; 
     }
     
 
@@ -26,7 +26,7 @@ class PidManager {
             pidMap.set(pid);
             return pid + MIN_PID;
         }
-        return -1; // Unable to allocate a PID (all PIDs are in use)
+        return -1; 
     }
 
     public void releasePid(int pid) {
