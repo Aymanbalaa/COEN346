@@ -11,10 +11,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-//            VARIABLES TO BE CHANGED                //
+//============VARIABLES TO BE CHANGED===============//
 //==================================================//
-    String Decision = "PRIRR";
-    int timeQuantum = 4;
+             String Decision = "PRIRR";
+                int timeQuantum = 4;
 //==================================================//
 
 
