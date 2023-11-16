@@ -32,3 +32,7 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
+    printf("parent: end\n");
+    return 0;
+}
+
